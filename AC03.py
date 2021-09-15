@@ -20,7 +20,7 @@ class OperacaoFabrica (object):
         elif (operador == "divisao"):
             return Divisao()
         elif (operador == "multiplicacao"):
-            return Mutiplicacao()
+            return Multiplicacao()
 
 class Operacao(metaclass=abc.ABCMeta):
     
@@ -29,7 +29,32 @@ class Operacao(metaclass=abc.ABCMeta):
         pass
 
 class Soma(Operacao):
-    resultado = valor1 + valor2
-    return resultado
+    def executar(self, valor1, valor2):
+        resultado = valor1 + valor2
+        return resultado 
 
-    
+class Subtracao(Operacao):
+    def executar(self, valor1, valor2):
+        resultado = valor1 - valor2
+        return resultado 
+
+class Divisao(Operacao):
+    def executar(self, valor1, valor2):
+        if (valor2 == 0):
+            resultado = "Divisão por 0"
+            return resultado
+        else:
+            resultado = valor1 / valor2
+            return resultado 
+
+class Multiplicacao(Operacao):
+    def executar(self, valor1, valor2):
+        resultado = valor1 * valor2
+        return resultado 
+
+
+class testadora(TestCase):
+    def teste_soma01(self):
+        resultadoCalculo = Calculadora()
+        resultado = resultadoCalculo.calcular(5,5, "soma")
+        self.assertEqual (resultado, 10)
